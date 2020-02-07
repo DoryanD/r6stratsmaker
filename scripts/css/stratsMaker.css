@@ -1,0 +1,338 @@
+html
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: rgba(114, 114, 114, 0.719);
+}
+
+.fas
+{
+    color: white;
+    font-size: 200%;
+    /*== font-size: 2em;*/
+}
+
+#rightmenu
+{
+    position: absolute;
+    width: 14%;
+    height: 60%;
+    top: 50%;
+    right: 0px;
+    transform: translate(0%, -50%);
+    background-color: rgba(53, 53, 53, 0.795);
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+#abilitieselector
+{
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 50%;
+    height: 95%;
+    top: 50%;
+    left: 38%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+#abilitieselector img
+{
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+#operatorsselector
+{
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 50%;
+    height: 95%;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+#operatorsselector img
+{
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+#gadgetsselector
+{
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 50%;
+    height: 95%;
+    top: 50%;
+    left: 71%;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+#gadgetsselector img
+{
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+#leftmenu
+{
+    position: absolute;
+    width: 14%;
+    height: 60%;
+    top: 50%;
+    left: -2px;
+    transform: translate(0%, -50%);
+    background-color: rgba(53, 53, 53, 0.795);
+    border: 2px solid black;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.tabSelector
+{
+    position: absolute;    
+    color: white;
+    height: 5%;
+    width: 100%;
+    text-align: center;
+}
+
+.tabText
+{
+    position: absolute;
+    height: 100%;
+    padding-top: 2%;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#contentListTab
+{    
+    border-width: 0px 2px 2px 0px;
+    border-color: white;
+    border-style: solid;
+    border-bottom-left-radius: 18px;
+}
+
+#imgPropertiesTab
+{
+    left: 50%;
+    border-width: 0px 0px 2px 2px;
+    border-color: white;
+    border-style: solid;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+#contentListTab:hover, #contentListTab.selected
+{
+    border-color: rgba(0, 0, 0, 0) white black rgba(0, 0, 0, 0);
+}
+
+#imgPropertiesTab:hover, #imgPropertiesTab.selected
+{
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) black white;
+}
+
+#imgProperties
+{
+    position: absolute;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    top: 52.5%;
+    transform: translate(0, -50%);
+    background-color: rgba(0, 0, 0, 0);
+    visibility: hidden;
+}
+
+#imgProperties dt
+{
+    padding-top: 0.7em;
+    font-size: 120%;
+    color: whitesmoke;
+    margin-top: 12%;
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+#imgProperties #imgPropertiesMsg
+{
+    text-align: center;
+    color: rgb(160, 0, 0);
+}
+
+#imgProperties .modificators #rotate.fa-undo, #imgProperties .modificators #resize.fa-compress-arrows-alt
+{
+    margin-top: 5%;
+    margin-left: 50%;
+    transform: translateX(-150%);
+}
+
+#imgProperties .modificators #rotate.fa-redo, #imgProperties .modificators #resize.fa-expand-arrows-alt
+{
+    position: absolute;
+    left: 50%;
+    transform: translate(50%, -100%);
+}
+
+#imgProperties .modificators .changeImgFloor#\30
+{
+    margin-top: 5%;
+    margin-left: 20%;
+    transform: translateX(-50%);
+}
+
+#imgProperties .modificators .changeImgFloor#\31
+{
+    position: absolute;
+    left: 35%;
+    transform: translate(-50%, -100%);
+}
+#imgProperties .modificators .changeImgFloor#\32
+{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%);
+}
+#imgProperties .modificators .changeImgFloor#\33
+{
+    position: absolute;
+    left: 65%;
+    transform: translate(-50%, -100%);
+}
+
+#imgProperties .modificators .changeImgFloor#\34
+{
+    position: absolute;
+    left: 80%;
+    transform: translate(-50%, -100%);
+}
+
+#imgProperties .modificators .fa-trash-alt
+{
+    position: absolute;
+    right: 15%;
+    bottom: 5%;
+}
+
+#contentList
+{
+    position: absolute;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    top: 52.5%;
+    transform: translate(0, -50%);
+    background-color: rgba(0, 0, 0, 0);
+    text-indent: 8%;
+    resize: none;
+    overflow-x: hidden;
+    overflow-y: visible;
+    visibility: visible;
+}
+
+#contentList dt
+{
+    padding-top: 0.7em;
+    font-size: 120%;
+    color: whitesmoke;
+}
+
+#contentList dd
+{
+    margin-left: 5%;
+    padding-top: 0.1em;
+    color: whitesmoke;
+    font-size: 100%;
+}
+
+.currentFloor
+{
+    color: whitesmoke;
+}
+
+.otherFloor
+{
+    color: rgb(145, 145, 145);
+}
+
+.map
+{
+    position: absolute;
+    width: 69%;
+    height: 88%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -47%);
+}
+
+#map0
+{
+    z-index: -1;
+}
+
+#map1, #map2, #map3, #map4
+{
+    z-index: -2;
+}
+
+#opdelete
+{
+    position: absolute;
+    top: 92%;
+    left: 88.6%;
+    width: 3%;
+    height: 6.5%;
+    transform: translate(-50%, -50%);
+}
+
+.changeFloor
+{
+    font-size: 4em;
+    position: absolute;
+}
+
+.changeFloor.fa-arrow-up
+{
+    left: 7.5%;
+    bottom: 5%;
+}
+
+.changeFloor.fa-arrow-down
+{
+    left: 2.5%;
+    bottom: 5%;
+}
+
+#msgBox
+{
+    background-color: rgba(80, 80, 80, 0);
+    position: absolute;
+    z-index: 5;
+    width: 30%;
+    height: 6%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 1%;
+    border-radius: 40px;
+}
+
+.ERROR
+{
+    text-align: center;
+    color: red;
+}

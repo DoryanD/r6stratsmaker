@@ -1,0 +1,54 @@
+#topBar
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background: linear-gradient(#141414, 70%, #333333);
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    height: 6%;
+}
+
+#topBar .fas
+{
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    color: white;
+    font-size: 2em;
+}
+
+#topBar .fa-home
+{
+    left: 1.5%;
+}
+
+#topBar #usernameTB
+{
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: white;
+}
+
+#topBar .fa-users-cog
+{
+    right: 12%;
+}
+
+#topBar .fa-user-cog
+{
+    right: 8.5%;
+}
+
+#topBar .fa-sign-out-alt, #topBar .fa-save
+{
+    right: 5%;
+}
+
+#topBar .fa-question-circle
+{
+    right: 1.5%;
+}

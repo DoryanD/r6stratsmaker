@@ -1,0 +1,78 @@
+﻿---------------------------------------------------------debug------------------------------------------------------
+
+
+
+﻿--------------------------------------------------------work in-----------------------------------------------------
+
+
+Continuer à retravailler l'interface du stratmaker
+Rendre le site utilisable au plus vite sans le systeme de team
+
+---------------------------------------------------------to do------------------------------------------------------
+
+affiché les loadout d'op
+affiché les abilities dans la list d'abilités uniquement en fction des op qui sont déja selectionner
+pareil pour les gadget
+raccourcis clavier
+faire des langues différentes
+ajouter le nom des salles
+zoom
+ban op
+
+(abbr img)
+
+un qui fait d'autre qui regardent
+géré le partage de strat entre team
+pour join une team, un text avec datalist de la list de team existante
+
+Pour la preview de la strat : IFRAME
+
+Mail support & aurte : nouvelle page avec formulaire
+Ajouter les alt
+Les textes disabled, les changer par des label <label for=""></label>
+
+pour les head : les ref aux css : le faire avec un include et en dynamique
+	chemin exemple : "../css/".'le nom du fichier courant'.".css";
+pour la creation de mdp, faire des test en live avec le javascrit et regex
+polices @import || @font-face -- use google font || fontsquirrel
+déplacé le viewport dans le @viewport des css
+retravailler les selecteurs : (diapo 74+)
+l'attribut transistion
+@keyframes --> déclaration de l'animation (diapo 104+)
+==> revoir l'animation selector ATK / DEF et voir pour le faire en CSS plutot que en JS
+
+StratPrint -> Funkyysmaps
+
+### Config ###
+Multi-operators : permettre à l'utilisateur de placer plusieurs fois le même opérateur
+
+----------------------------------------------------------done------------------------------------------------------
+
+<input type="text" name="country_code" pattern="[A-Za-z]{3}" title="Three letter country code">
+%tage sur l'ecran de chargement
+insérer les 3 selector (abiliti, operator & gadget) dans la div right menu
+*(faire les adaptation dans le css nécessaire pour cela)*
+Msg d'erreur sur le strat maker
+user settings
+voir le menu et faire le changement pour le mail
+plutot que de rename les json des starts en fction de comment l'utilisateur le veux, faire plutot une table
+d'équivalence entre ce que l'user à comme nom d'affiché et comment le fichier s'appel réellement
+une page php uniquement dédié au msg d'erreur
+Quand tu viens de save une strat, ajouter l'option "nouvelle strat"
+Ap choix obj, av d'aller sur le stratmaker, ajouter un écran proposant "1- new strat; 2- load a existing strat"
+Login
+changer les px en % || em sur l'index
+et voir sur le top menu si il est possible de le faire s'adapter aussi
+mise en garde sur ma non possession des images
+mails de contact
+auto save
+une img select change d'étage elle bouge avec
+faire des menu defilant sur la deuxieme colonne du menu de gauche
+changer le nombre d'abilities maximum, non pas 10 : capi a 2 truc différent, frost 3 welcome mat ...
+edit text <--> liste truc déjà placés
+zofia, split sa spe en deux comme pour capitao
+quand on select une image qui se rotate, que la rotate actuelle se mette dans l'input
+separer fumi et feu de capi
+defuser
+--> le syst d'enregistrement des position, les faire en % et pas en x / y
+refaire tt les positionnement, les truc en fonction des tailles d'écran bugs

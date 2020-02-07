@@ -1,0 +1,157 @@
+@import url(anim.css);
+
+html
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: black;
+    z-index: -5;
+}
+
+#bg
+{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+#maps
+{
+    position: absolute;
+    text-align: center;
+    width: 90%;
+    height: 85%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -46.5%);
+}
+
+#maps img
+{
+    width: 15%;
+    height: auto;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+#mods
+{
+    position: absolute;
+    text-align: center;
+    width: 90%;
+    height: 85%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -46.5%);
+
+}
+
+#mods img
+{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+#atkImg
+{
+    position: absolute;
+    left: 22%;
+    width: 30%;
+    z-index: 0;
+    opacity: 1;
+}
+
+#defImg
+{
+    position: absolute;
+    left: 48%;
+    width: 30%;
+    z-index: 0;
+    opacity: 1;
+}
+
+#defSelect
+{
+    position: absolute;
+    left: 22%;
+    width: 30%;
+    z-index: -1;
+    opacity: 0;
+}
+
+#atkSelect
+{
+    position: absolute;
+    left: 48%;
+    width: 30%;
+    z-index: -1;
+    opacity: 0;
+}
+
+#objectives
+{
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 2px;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.map
+{
+    position: absolute;
+    top: -34.5%;
+    left: 400%;
+    width: 400%;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+#map0
+{
+    z-index: -1;
+}
+
+#map1
+{
+    z-index: -2;
+}
+
+#map2
+{
+    z-index: -2;
+}
+
+#map3
+{
+    z-index: -2;
+}
+
+#map4
+{
+    z-index: -2;
+}
+
+#nameobj
+{
+    width: 140%;
+    height: 50%;
+    position: relative;
+    border: 2px solid black;
+    line-height: 175%;
+    margin-top: 5px;
+    padding: 2px;
+    border-radius: 2px;
+    background-color: #636871a6;
+}
+
+#wordobj
+{
+    margin-left: 0.73%;
+}

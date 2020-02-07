@@ -1,0 +1,62 @@
+*
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+html
+{
+    color: black;
+    z-index: -5;
+}
+
+#bg
+{
+    width: 00%;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+.recovery
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(64, 64, 64);
+  border: 2px solid rgb(64, 64, 64);
+  border-radius: 4px;
+  width: 20%;
+  height: 30%;
+}
+
+.recovery h1
+{
+  text-align: center;
+}
+
+.recovery input[required]
+{
+  margin-left: 50%;
+  margin-top: 2%;
+  transform: translate(-50%, 0%);
+  width: 70%;
+  font-size: 100%;
+  border: 2px inset black;
+  border-radius: 3px;
+}
+
+.recovery input[type=submit]
+{
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  font-size: 100%;
+  width: 40%;
+  height: 15%;
+  background-color: rgb(128, 128, 128);
+  border: 2px solid rgb(128, 128, 128);
+  border-radius: 3px;
+}

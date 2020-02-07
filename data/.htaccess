@@ -1,0 +1,4 @@
+AuthName "Directory protected by an admin password"
+AuthType Basic
+AuthUserFile "C:/Logiciels/wamp/www/r6stratsmaker/.htpasswd"
+Require valid-user

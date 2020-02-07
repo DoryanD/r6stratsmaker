@@ -1,0 +1,256 @@
+@media screen and (max-width: 479px)
+{
+
+}
+
+@media screen and (max-width: 767px)
+{
+
+}
+
+@media only screen and (max-width: 1919px)
+{
+  #filterListBox input[type=submit]
+  {
+    font-size: .8em;
+  }
+
+  .filteredContainer
+  {
+    font-size: 1em;
+  }
+  
+  .checkmark
+  {
+      border-radius: 6px;
+  }
+  
+  .filteredContainer .checkmark:after
+  {
+      font-size: .9em;
+    transform: translate(-150%, -5%);
+  }
+}
+
+@media only screen and (min-width: 1920px)
+{
+  #filterListBox input[type=submit]
+  {
+    font-size: 1em;
+  }
+
+  .filteredContainer
+  {
+    font-size: 1.2em;
+  }
+  
+  .checkmark
+  {
+      border-radius: 7px;
+  }
+  
+  .filteredContainer .checkmark:after
+  {
+      font-size: 1em;
+    transform: translate(-150%, -10%);
+  }
+  
+  .fas
+  {
+    font-size: 1em;
+  }
+}
+
+*
+{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+html
+{
+  color: black;
+  z-index: -5;
+}
+
+#bg
+{
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+#centerBox
+{
+  background-color: rgba(200, 200, 200, 0.95);
+  width: 22%;
+  height: 30%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+  border: 2px white outset;
+  border-radius: 10px;
+  overflow-y: scroll;
+  text-align: center;
+}
+
+#stratListBox form
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#stratListBox input
+{
+  height: 15%;
+}
+
+#stratListBox .fa-cog:hover
+{
+  
+}
+
+#newStrat
+{
+  border: none;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px white outset;
+  border-left: 2px white outset;
+  border-right: 2px white outset;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  width: 102%;
+  margin-left: -1%;
+  margin-bottom: 5%;
+}
+
+#newStrat:hover
+{
+  box-shadow: 0px 5px 10px rgba(50, 50, 50, 0.3);
+  border-width: 0px 3px 2px 3px;
+  border-color: rgba(50, 50, 50, 0.3);
+  border-style: outset;
+}
+
+#stratListBox input[type=submit]
+{
+  width: 75%;
+  height: 10%;
+}
+
+#stratListBox > *
+{
+    margin-bottom: 5%;
+}
+
+input[type=submit], input[type=button]
+{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+input[type=submit]:hover, input[type=button]:hover
+{
+  background-color: rgba(0, 0, 0, 0);
+  border-color: white;
+}
+
+#filterListBox
+{
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 15%;
+    height: 90%;
+    position: absolute;
+    left: 9%;
+    top: 7.5%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    border: 2px white outset;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#filterListBox h2
+{
+  margin-top: 2%;
+}
+
+#filterListBox h3, h2
+{
+  text-align: center;
+}
+
+.filteredContainer
+{
+  display: block;
+  position: relative;
+  margin-left: 5%;
+  margin-bottom: 2%;
+  cursor: pointer;
+  width: 90%;
+}
+
+.filteredContainer input[type=checkbox]
+{
+  position: absolute;
+  opacity: 0.0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark
+{
+  position: absolute;
+  top: 0;
+  left: 95%;
+  transform: translateX(-50%);
+  height: 110%;
+  width: 10%;
+  background-color: rgb(220, 220, 220);
+}
+
+.filteredContainer:hover input ~ .checkmark
+{
+  background-color: rgb(200, 200, 200);
+}
+
+.filteredContainer input:checked ~ .checkmark
+{
+  background-color: rgb(120, 120, 120);
+}
+
+.checkmark:after
+{
+  content: "✔";
+  position: absolute;
+  display: none;
+}
+
+.filteredContainer input:checked ~ .checkmark:after
+{
+  display: block;
+}
+
+.filteredContainer .checkmark:after
+{
+  left: 50%;  
+  width: 20%;
+  height: 40%;
+  color: white;
+}
+
+#filterListBox input[type=submit]
+{
+  position: absolute;
+  top: 96%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}

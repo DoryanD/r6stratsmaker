@@ -1,0 +1,96 @@
+html
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: black;
+    z-index: -5;
+}
+
+.fas
+{
+    font-size: 1em;
+}
+
+.bold
+{
+    font-weight: bold !important;
+}
+
+.centered
+{
+    text-align: center !important;
+}
+
+#bg
+{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+#aboutBox
+{
+    font-family: "Lucida Console", Monaco, monospace;
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 60%;
+    height: 70%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    border: 2px white outset;
+    border-radius: 10px;
+}
+
+#aboutBox h2
+{
+    margin-top: 8%;
+    color: rgb(32, 32, 32);
+    text-align: center;
+}
+
+#aboutBox .infoMsg, #aboutBox ul
+{
+    margin: 2% 2% 2% 2%;
+    text-align: justify;
+}
+
+#aboutBox li
+{
+    margin-bottom: 1.5%;
+}
+
+#aboutBox li li
+{
+    margin-top: -1%;
+}
+
+a
+{
+    font-weight: bold;
+}
+
+a:hover
+{
+    font-size: 1.1em;
+}
+
+#aboutBox .contact
+{
+    position: absolute;
+    bottom: 12%;
+    width: 100%;
+    text-align: center;
+}
+
+#aboutBox #textRedirect, #logoutRedirect
+{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}

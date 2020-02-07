@@ -1,0 +1,138 @@
+@media screen and (max-width: 479px)
+{
+
+}
+
+@media screen and (max-width: 767px)
+{
+
+}
+
+@media only screen and (max-width: 1919px)
+{
+  #logBox input, #logBox label, #logBox #bottomBox, .fas
+  {
+    font-size: .77em;
+  }
+
+  .fa-eye, .fa-eye-slash
+  {
+    transform: translateY(40%);
+    right: 8%;
+  }
+}
+
+@media only screen and (min-width: 1920px)
+{
+  #logBox input, #logBox label, #logBox #bottomBox, .fas
+  {
+    font-size: 1em;
+  }
+
+  .fa-eye, .fa-eye-slash
+  {
+    transform: translateY(25%);
+    right: 9%;
+  }
+}
+
+*
+{
+  font-family: Impact, 'Arial Narrow', sans-serif;
+}
+
+html
+{
+  color: black;
+  z-index: -5;
+}
+
+#bg
+{
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+#logBox
+{
+  background-color: rgba(200, 200, 200, 0.95);
+  width: 22%;
+  height: 30%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+  border: 2px white outset;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-direction: column;
+}
+
+#logBox h3
+{
+  text-align: center;
+  margin-bottom: 10%;
+}
+
+#logBox span, #logBox #bottomBox
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#logBox label
+{
+  color: black;
+  width: 20%;
+}
+
+#logBox input[type=submit], input[type=button]
+{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#logBox input[type=submit]:hover, input[type=button]:hover
+{
+  background-color: rgba(0, 0, 0, 0);
+  border-color: white;
+}
+
+#logBox .formEdit
+{
+  
+  margin-bottom: 5%;
+}
+
+#logBox .registrationEdit:valid
+{
+  box-shadow: 0px 0px 1px 1px green;
+}
+
+#logBox .registrationEdit:invalid
+{
+  box-shadow: 0px 0px 1px 1px red;
+}
+
+#logBox .formPreTxt
+{
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#logBox #bottomBox
+{
+  margin-top: 7%;
+}
+
+.fa-eye, .fa-eye-slash
+{
+  position: absolute;
+}

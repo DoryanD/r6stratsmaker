@@ -1,0 +1,177 @@
+*
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+html
+{
+    color: black;
+    z-index: -5;
+}
+
+#bg
+{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+#teamSettingsBox1
+{
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 30%;
+    height: 40%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    border: 2px white outset;
+    border-radius: 10px;
+}
+
+#teamSettingsBox1 .formPreTxt
+{
+    position: absolute;
+    width: 22%;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#teamSettingsBox1 .formEdit
+{
+    margin-left: 20%;
+}
+
+#teamSettingsBox1 .formSubmit
+{
+    position: absolute;
+    right: 5%;
+    width: auto;
+}
+
+#teamSettingsBox1 input[type=submit]
+{
+  width: 15%;
+}
+
+#teamSettingsBox2
+{
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 10%;
+    height: 75%;
+    position: absolute;
+    left: 94.5%;
+    top: 10%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    border: 2px white outset;
+    border-radius: 10px;
+}
+
+#teamSettingsBox2 .formSubmit
+{
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 5%;
+    transform: translateX(-50%);
+}
+
+#teamSettingsBox3
+{
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 10%;
+    height: 85%;
+    position: absolute;
+    left: 7%;
+    top: 10%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    border: 2px white outset;
+    border-radius: 10px;
+}
+
+#teamSettingsBox3 .formSubmit
+{
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 5%;
+    transform: translateX(-50%);
+}
+
+#teamSettingsBox4
+{
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 15%;
+    height: 85%;
+    position: absolute;
+    left: 22%;
+    top: 10%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    border: 2px white outset;
+    border-radius: 10px;
+}
+
+#teamSettingsBox4 .formSubmit
+{
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 5%;
+    transform: translateX(-50%);
+}
+
+#teamSettingsBox5
+{
+    background-color: rgba(200, 200, 200, 0.95);
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    left: 94.5%;
+    top: 93%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    border: 2px white outset;
+    border-radius: 10px;
+}
+
+#teamSettingsBox5 .formSubmit
+{
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}
+
+h3
+{
+    margin-top: 5%;
+    margin-bottom: 3%;
+    text-align: center;
+}
+
+input
+{
+    margin-left: 2%;
+    font-size: 1em;
+}
+
+input[disabled]
+{
+  color: black;
+}
+
+input[type=submit], input[type=button]
+{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+input[type=submit]:hover, input[type=button]:hover
+{
+  background-color: rgba(0, 0, 0, 0);
+  border-color: white;
+}
