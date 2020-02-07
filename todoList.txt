@@ -43,6 +43,9 @@ l'attribut transistion
 
 StratPrint -> Funkyysmaps
 
+Pour les mapSchematics : Faire, comme leur nom l'indique, es cshémas, à la main
+<--> lien avec le fichier contenant les noms de call de team
+
 ### Config ###
 Multi-operators : permettre à l'utilisateur de placer plusieurs fois le même opérateur
 

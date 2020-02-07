@@ -1,4 +1,5 @@
 var imagesList = [];
+
 var nbImagePlaced = {
     total : 0,
     operators : 0,
@@ -24,17 +25,19 @@ var nbImagePlaced = {
         total: 0
     }
 };
+
 var map = "";
 var mod = "";
 var obj = "";
 var fileName = "";
 var jsonStr = "";
+
 var saved = 0;
 var lastRotateValue = 0;
-var mapX = 0;
-var mapY = 0;
 var roofMax = 0;
 var timeToSave = 10;
+
+
 var currentFloor = 0;
 var currentRotation = 0;
 var currentNbRt = 0;
@@ -45,21 +48,87 @@ var currentNbOP = 0;
 var currentNbAb = 0;
 var currentNbGd = 0;
 var currentNbOt = 0;
+
+
 var interv1 = null;
 var interv4 = null;
 var animating = 0;
 
+
+var mapCanvasSpan;
+var mapCanvasCtx;
+var mapCanvasBG;
+var mapCanvasSpanStyle;
+var mapCanvas;
+var leftMenuStyle;
+var rightMenuStyle;
+var topBarStyle;
+var mapX;
+var mapY;
+var mapL;
+var mapT;
+
 function init(str1, str2, str3, str4, str5)
 {
     map = str1; mod = str2; obj = str3; fileName = str4; roofMax = str5;
-    mapX = Math.round(.69 * screen.availWidth * 10) / 10;
-    mapY = Math.round(.88 * screen.availHeight * 10) / 10;
     document.getElementById("contentList").value = "";
 
-    interv1 = setInterval(saveData, timeToSave * 60 * 1000);
+    mapCanvasSpan = document.querySelector("#mapCanvasSpan");
+    mapCanvasSpanStyle = getComputedStyle(mapCanvasSpan);
+    mapCanvas = document.getElementById("mapCanvas");
+    mapCanvasCtx = mapCanvas.getContext("2d");
+    leftMenuStyle = getComputedStyle(document.querySelector(".leftMenu"));
+    rightMenuStyle = getComputedStyle(document.querySelector(".rightMenu"));
+    topBarStyle = getComputedStyle(document.querySelector("#topBar"));
+
+    mapX = screen.availWidth - (
+        (styleValueToInt(leftMenuStyle.width) + styleValueToInt(leftMenuStyle.left)) +
+        (styleValueToInt(rightMenuStyle.width) + styleValueToInt(rightMenuStyle.right)) +
+        (screen.availWidth * 0.02)
+    ) + "px";
+    mapY = screen.availHeight - (
+        (styleValueToInt(topBarStyle.height) + styleValueToInt(topBarStyle.top)) +
+        (screen.availHeight * (0.02 + 0.0975))
+    ) + "px";
+    mapL = (
+        (styleValueToInt(leftMenuStyle.width) + styleValueToInt(leftMenuStyle.left))
+    ) + "px";
+    mapT = (
+        (styleValueToInt(topBarStyle.height) + styleValueToInt(topBarStyle.top))
+    ) + "px";
+
+    mapCanvasSpan.style.position = "absolute";
+    mapCanvasSpan.style.margin = "1% 1% 1% 1%";
+
+    mapCanvasSpan.style.width = mapX;
+    mapCanvasSpan.style.height = mapY;
+    mapCanvasSpan.style.left = mapL;
+    mapCanvasSpan.style.top = mapT;
+
+    mapCanvasSpan.style.zIndex = 0.9;
+
+    mapCanvas.width = styleValueToInt(mapX);
+    mapCanvas.height = styleValueToInt(mapY);
+    mapCanvas.style.zIndex = 0.1;
+
+    mapCanvasBG = new Image();
+    mapCanvasBG.id = "canvasBG";
+    mapCanvasBG.classList = ["canvasBG"];
+    mapCanvasBG.style.position = "absolute";
+    mapCanvasBG.style.width = "100%";
+    mapCanvasBG.style.height = "100%";
+    mapCanvasBG.style.left = "0px";
+    mapCanvasBG.style.top = "0px";
+    mapCanvasBG.style.border = "2px inset rgb(160, 160, 160)";
+    mapCanvasBG.style.borderRadius = "4px";
+    mapCanvasBG.style.zIndex = "0.2";
+    mapCanvasSpan.appendChild(mapCanvasBG);
+    actualizeImages();
+    
+    //interv1 = setInterval(saveData, timeToSave * 60 * 1000);
 }
 
-class Image
+class PersonnalizedImage
 {
     constructor(_type, _name, _coords, _id, _size, _floor, _zindex, _rotateIndex)
     {
@@ -193,14 +262,15 @@ class Image
         {
             this.id = _id+"-"+this.index;
         }
-        this.coords = _coords;
+        //this.coords = _coords;
         this.size = _size;
         this.floor = _floor;
         this.zIndex = _zindex;
         this.rotateIndex = _rotateIndex;
+        this.draggable = true;
         this.exists = true;
+        this.lastSelected = false;
         saved = 0;
-        setupImage(this);
     }
 }
 
@@ -208,11 +278,12 @@ function newImage(_type, _name)
 {
     var coordsbase = [50, 50];
     var sizebase = [30, 30];
-    var _newImage = new Image(_type, _name+"-img", coordsbase, _name, sizebase, currentFloor, 1, 0);
+    var _newImage = new PersonnalizedImage(_type, _name+"-img", coordsbase, _name, sizebase, currentFloor, 1, 0);
     if(_newImage.exists)
     {
         imagesList.push(_newImage);
         actualizeContentList();
+        return _newImage;
     }
 }
 
@@ -236,36 +307,36 @@ function setupImage(_obj)
     para.onclick = function selectImgCaller(event){selectImg(_obj.id)};
     para.floor = _obj.floor;
     para.rotateIndex = _obj.rotateIndex;
-    var tmpelmt = document.getElementById("mapdiv").appendChild(para);
-    var stl = tmpelmt.style;
-    stl.position = "absolute";
-    stl.transform = "translate(-50%, -50%)";
-    stl.zIndex = _obj.zIndex;
+    para.style.position = "absolute";
+    para.style.transform = "translate(-50%, -50%)";
+    para.style.zIndex = _obj.zIndex;
+    mapCanvasSpan.appendChild(para);
     selectImg(_obj.id);
-    doTranslation(_obj.coords, _obj.id);
     doResize(_obj.size);
-    actualizeImages();
+    return para;
+    //doTranslation(_obj.coords, _obj.id);
+    
 }
 
 function selectImg(_id)
 {
     document.getElementsByName("imageOnTheMap").forEach(unselect);
     var _obj = document.getElementById(_id);
-    _obj.style.border = "1px solid orangered";
-    _obj.onclick = function moveImgCaller(event){
+    console.log(_obj, _id);
+    _obj.onclick = function unselectCaller(event){
             unselect(this);
-            document.getElementById("map"+currentFloor).onclick = function moveImgCaller(_event){moveImg(event, "none")};
             };
-    document.getElementById("map"+currentFloor).onclick = function moveImgCaller(event){moveImg(event, _obj.id)};
     if(_obj.floor != currentFloor)
     {
         goToFloor(_obj.floor);
     }
+    _obj.lastSelected = true;
 }
 
 function unselect(_item)
 {
     _item.style.border = "1px solid rgba(0, 0, 0, 0)";
+    _item.lastSelected = false;
     _item.onclick = function selectImgCaller(event){selectImg(_item.id)};
 }
 
@@ -282,18 +353,6 @@ function doResize(_size)
     currentImg.size = _size;
     currentImg.style.width = currentImg.size[0] + "px";
     currentImg.style.height = currentImg.size[1] + "px";
-}
-
-function moveImg(_event, _id)
-{
-    if(_id != "none")
-    {
-        var _obj = document.getElementById(_id);
-        var x = _event.clientX * 100 / screen.availWidth;
-        var y = ((_event.offsetY) + (screen.height * .12 / 2)) * 100 / mapY;
-        _obj.coords = [x, y];
-        doTranslation(_obj.coords, _obj.id);
-    }
 }
 
 function deleteImage()
@@ -335,7 +394,7 @@ function getSelectedImage(_mod)
     var item = document.getElementsByName("imageOnTheMap");
     for(var i = 0; i < item.length; i++)
     {
-        if(item[i].style.border == "1px solid orangered")
+        if(item[i].lastSelected)
         {
             switch(_mod)
             {
@@ -376,7 +435,7 @@ function getSelectedImageType()
                 _type = arr[k + 1];
             }
         }
-        if(item[i].style.border == "1px solid orangered")
+        if(item[i].lastSelected)
         {
             return _type;
         }
@@ -547,7 +606,7 @@ function endOfTransmission(strIn)
             var _size_ = [parseFloat(jsonStr["images"][k].style.width), parseFloat(jsonStr["images"][k].style.height)];
             var _zindex_ = jsonStr["images"][k].style.zIndex;
             var _rotateIndex_ = jsonStr["images"][k].rotateIndex;
-            imagesList.push(new Image(jsonStr["images"][k].type, jsonStr["images"][k].id.slice(0, -4), _coords_, jsonStr["images"][k].id.slice(0, -4), _size_, jsonStr["images"][k].floor, _zindex_, _rotateIndex_));
+            imagesList.push(new PersonnalizedImage(jsonStr["images"][k].type, jsonStr["images"][k].id.slice(0, -4), _coords_, jsonStr["images"][k].id.slice(0, -4), _size_, jsonStr["images"][k].floor, _zindex_, _rotateIndex_));
             actualizeContentList();
             k++;
         }
@@ -592,12 +651,7 @@ function lowerFloor()
 
 function actualizeImages()
 {
-    var _map = document.getElementsByClassName("map");
-    for(var k = 0; k < _map.length; k++)
-    {
-        _map[k].style.zIndex = -3;
-    }
-    document.getElementById("map"+currentFloor).style.zIndex = -1;
+    if(mapCanvasBG != null) mapCanvasBG.src = "../../UI/img/mapsSchematics/" + map + "-" + currentFloor + ".png";
     var item = document.getElementsByName("imageOnTheMap");
     for(var i = 0; i < item.length; i++)
     {
@@ -668,8 +722,8 @@ function tabsManager(tag1, tag2)
     var selected = document.getElementById(tag1);
     var old = document.getElementById(tag2);
 
-    selected.classList = "tabText selected";
-    old.classList = "tabText";
+    selected.classList.add("selected");
+    old.classList.remove("selected");
 
     document.getElementById(tag1.replace("Tab", "")).style.visibility = "visible";
     document.getElementById(tag2.replace("Tab", "")).style.visibility = "hidden";
@@ -735,7 +789,127 @@ function setMsg(_type, _msg)
     }
 }
 
+function drag(ev)
+{
+    ev.dataTransfer.setData("text/plain", ev.target.id);
+
+    ev.target.style.visibility = "hidden";
+
+    //### Preview ###\\
+    var elmnt = document.querySelector("#"+ev.target.id);
+    var style = getComputedStyle(elmnt);
+    var imgWidthOffset = styleValueToInt(style.width) / 2;
+    var imgHeightOffset = styleValueToInt(style.height) / 2;
+    ev.dataTransfer.setDragImage(ev.target, imgWidthOffset, imgHeightOffset);
+}
+
+function drop(ev)
+{
+    //### Drop Management ###\\
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var style = mapCanvasSpanStyle;
+
+    ev.target.appendChild(document.getElementById(data));
+
+    var children = ev.target.children;
+    console.log(children, data);
+    for(var i = 0; i < children.length; i++)
+    {
+        if(children[i].id == data)
+        {
+            var styleI = getComputedStyle(children[i]);
+            //### Img ###\\
+            var img = newImage(children[i].name.split(",")[0], children[i].name.split(",")[1]);
+            img = setupImage(img);
+            var imgWidthPx = styleValueToInt(styleI.width);
+            var imgHeightPx = styleValueToInt(styleI.height);
+            var imgWidthMidPx = imgWidthPx / 2;
+            var imgHeightMidPx = imgHeightPx / 2;
+
+            //### Left & Right ###\\
+            var spaceLeftPx = styleValueToInt(style.left) - (styleValueToInt(style.width) / 2);
+            var spaceRightPx = screen.availWidth - spaceLeftPx - styleValueToInt(style.width);
+            var spaceLeftPrct = toScreenWPrct(spaceLeftPx);
+            var spaceRightPrct = toScreenWPrct(screen.availWidth - spaceRightPx);
+            var spaceInLimitsDifferenceXPrct = spaceRightPrct - spaceLeftPrct;
+
+            //### ClientX ###\\
+            var clientXMidImgPx = ev.clientX - imgWidthMidPx;
+            var clientXPrct = toScreenWPrct(clientXMidImgPx);
+
+            //### Box Horizontal ###\\
+            var boxXScalingFactor = 100 / spaceInLimitsDifferenceXPrct;
+            var boxXClientXPrct = clientXPrct - spaceLeftPrct;
+            var boxXRightCoordPx = screen.availWidth - spaceRightPx;
+            var boxXLimitLeftSizedOnImgPx = spaceLeftPx + imgWidthMidPx;
+            var boxXLimitRightSizedOnImgPx = boxXRightCoordPx - imgWidthMidPx;
+            var boxXMaxXPrct = toScreenWPrct(boxXLimitRightSizedOnImgPx) - spaceLeftPrct - toScreenWPrct(imgWidthPx / 2);
+            
+            //### Displayed X Managememnt ###\\
+            var x = boxXClientXPrct * boxXScalingFactor;
+            x = ((ev.clientX > boxXLimitRightSizedOnImgPx) ? boxXMaxXPrct * boxXScalingFactor : x);
+            x = ((ev.clientX < boxXLimitLeftSizedOnImgPx) ? 0 : x);
+            x = Math.round(x * 1000) / 1000;
+
+
+            //### Top & Bottom ###\\
+            var spaceTopPx = styleValueToInt(style.top) - (styleValueToInt(style.height) / 2);
+            var spaceBotPx = screen.availHeight - spaceTopPx - styleValueToInt(style.height);
+            var spaceTopPrct = toScreenHPrct(spaceTopPx);
+            var spaceBotPrct = toScreenHPrct(screen.availHeight - spaceBotPx);
+            var spaceInLimitsDifferenceYPrct = spaceBotPrct - spaceTopPrct;
+            
+            //### Client Y ###\\
+            var clientYMidImgPx = ev.clientY - imgHeightMidPx;
+            var clientYPrct = toScreenHPrct(clientYMidImgPx);
+
+            //### Box Vertical ###\\
+            var boxYScalingFactor = 100 / spaceInLimitsDifferenceYPrct;
+            var boxYClientYPrct = clientYPrct - spaceTopPrct;
+            var boxYBotCoordPx = screen.availHeight - spaceBotPx;
+            var boxYLimitTopSizedOnImgPx = spaceTopPx + imgHeightMidPx;
+            var boxYLimitBotSizedOnImgPx = boxYBotCoordPx - imgHeightMidPx;
+            var boxYMaxYPrct = toScreenHPrct(boxYLimitBotSizedOnImgPx) - spaceTopPrct - toScreenHPrct(imgHeightPx / 2);
+
+            //### Displayed Y Management ###\\
+            var y = boxYClientYPrct * boxYScalingFactor;
+            y = ((ev.clientY > boxYLimitBotSizedOnImgPx) ? boxYMaxYPrct * boxYScalingFactor : y);
+            y = ((ev.clientY < boxYLimitTopSizedOnImgPx) ? 0 : y);
+            y = Math.round(y * 1000) / 1000;
+
+            console.log(x, y);
+            //### Displaying ###\\
+            img.style.position = "absolute";
+            img.style.visibility = "visible";
+            img.style.left = x+"%";
+            img.style.top = y+"%";
+            img.floor = currentFloor;
+        }
+    }
+}
+
+function allowDrop(ev)
+{
+    ev.preventDefault();
+}
+
 function stopLoading()
 {
     document.getElementById("body").removeChild(document.getElementById("loadingBox"));
+}
+
+function styleValueToInt(val)
+{
+    return val.replace("px", "") * 1;
+}
+
+function toScreenWPrct(val)
+{
+    return val / screen.availWidth * 100;
+}
+
+function toScreenHPrct(val)
+{
+    return val / screen.availWidth * 100;
 }

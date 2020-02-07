@@ -11,7 +11,7 @@ html
     /*== font-size: 2em;*/
 }
 
-#rightmenu
+.rightMenu
 {
     position: absolute;
     width: 14%;
@@ -25,69 +25,31 @@ html
     border-bottom: 2px solid black;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
+    display: flex;
+    align-items: center;
 }
 
-#abilitieselector
+.rightMenu span.selectorsLists
 {
-    position: absolute;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    width: 50%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: space-between;
     height: 95%;
-    top: 50%;
-    left: 38%;
-    transform: translateY(-50%);
-    z-index: 2;
+    width: 95%;
 }
 
-#abilitieselector img
+.rightMenu span.selectorsLists > span
 {
-    width: 60%;
-    border: 2px solid black;
-    border-radius: 2px;
-}
-
-#operatorsselector
-{
-    position: absolute;
-    overflow-x: hidden;
+    width: 32%;
     overflow-y: scroll;
-    width: 50%;
-    height: 95%;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    z-index: 1;
 }
 
-#operatorsselector img
+.rightMenu img
 {
-    width: 60%;
-    border: 2px solid black;
-    border-radius: 2px;
+    width: 93%;
 }
 
-#gadgetsselector
-{
-    position: absolute;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    width: 50%;
-    height: 95%;
-    top: 50%;
-    left: 71%;
-    transform: translateY(-50%);
-    z-index: 3;
-}
-
-#gadgetsselector img
-{
-    width: 60%;
-    border: 2px solid black;
-    border-radius: 2px;
-}
-
-#leftmenu
+.leftMenu
 {
     position: absolute;
     width: 14%;
@@ -103,48 +65,46 @@ html
 
 .tabSelector
 {
-    position: absolute;    
+    display: flex;
+    justify-content: center;
     color: white;
-    height: 5%;
     width: 100%;
-    text-align: center;
+    height: 5%;
 }
 
-.tabText
+.tabSelector > span
 {
-    position: absolute;
-    height: 100%;
-    padding-top: 2%;
-    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    text-align: center;
+    border-color: white;
+    border-style: solid;
 }
 
 #contentListTab
 {    
-    border-width: 0px 2px 2px 0px;
-    border-color: white;
-    border-style: solid;
+    border-width: 0px 1px 2px 0px;
     border-bottom-left-radius: 18px;
 }
 
 #imgPropertiesTab
 {
-    left: 50%;
-    border-width: 0px 0px 2px 2px;
-    border-color: white;
-    border-style: solid;
+    border-width: 0px 0px 2px 1px;
     border-top-right-radius: 18px;
     border-bottom-right-radius: 18px;
 }
 
 #contentListTab:hover, #contentListTab.selected
 {
-    border-color: rgba(0, 0, 0, 0) white black rgba(0, 0, 0, 0);
+    border-color: transparent white black transparent;
 }
 
 #imgPropertiesTab:hover, #imgPropertiesTab.selected
 {
-    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) black white;
+    border-color: transparent transparent black white;
 }
 
 #imgProperties
@@ -157,76 +117,45 @@ html
     transform: translate(0, -50%);
     background-color: rgba(0, 0, 0, 0);
     visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#imgProperties dt
+#imgPropertiesMsg
 {
-    padding-top: 0.7em;
-    font-size: 120%;
-    color: whitesmoke;
-    margin-top: 12%;
-    margin-bottom: 2%;
+    position: absolute;
+}
+
+#imgProperties .imgPropTitle
+{
+    color: white;
+    font-size: 1.5em;
     text-align: center;
 }
 
-#imgProperties #imgPropertiesMsg
+#imgProperties span[class^=imgProp]
 {
-    text-align: center;
-    color: rgb(160, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
 
-#imgProperties .modificators #rotate.fa-undo, #imgProperties .modificators #resize.fa-compress-arrows-alt
+#imgProperties span.modificators
 {
-    margin-top: 5%;
-    margin-left: 50%;
-    transform: translateX(-150%);
+    margin-top: 8%;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
-#imgProperties .modificators #rotate.fa-redo, #imgProperties .modificators #resize.fa-expand-arrows-alt
+#imgProperties span.imgPropDel .modificators
 {
-    position: absolute;
-    left: 50%;
-    transform: translate(50%, -100%);
-}
-
-#imgProperties .modificators .changeImgFloor#\30
-{
-    margin-top: 5%;
-    margin-left: 20%;
-    transform: translateX(-50%);
-}
-
-#imgProperties .modificators .changeImgFloor#\31
-{
-    position: absolute;
-    left: 35%;
-    transform: translate(-50%, -100%);
-}
-#imgProperties .modificators .changeImgFloor#\32
-{
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -100%);
-}
-#imgProperties .modificators .changeImgFloor#\33
-{
-    position: absolute;
-    left: 65%;
-    transform: translate(-50%, -100%);
-}
-
-#imgProperties .modificators .changeImgFloor#\34
-{
-    position: absolute;
-    left: 80%;
-    transform: translate(-50%, -100%);
-}
-
-#imgProperties .modificators .fa-trash-alt
-{
-    position: absolute;
-    right: 15%;
-    bottom: 5%;
+    margin-right: 30%;
+    justify-content: flex-end;
 }
 
 #contentList

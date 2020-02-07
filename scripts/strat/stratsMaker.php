@@ -61,6 +61,12 @@ echo "<html>";
 
         
         echo "<body id=\"body\" onload=\"init('$map', '$mod', '$obj', '$fileName', '$roofIndex')\">\n";
+            echo "<div id=\"topBar\">\n";
+                echo "<a id=\"home\" href=\"../../index.php\"><i class=\"fas fa-home\"></i></a>\n";
+                echo "<p id=\"usernameTB\">".$_SESSION["topText"]."</p>\n";
+                echo "<abbr title=\"Save data\"><i id=\"savedata\" class=\"fas fa-save\" onclick=\"saveData()\"></i></abbr>\n";
+            echo END_DIV;
+        
             if(file_exists(STRATS_PATH.$fileName))
             {
                 include  "../UIScripts/LoadingScreen.php";
@@ -82,101 +88,110 @@ echo "<html>";
             }
 
             echo "<div id=\"mapdiv\"></div>\n";
-            for($i = 0; $i < $roofIndex + 1; $i++)
-            {
-                echo "<img id=\"map$i\" class=\"map\" src=\"".IMG_PATH."mapsSchematics/$map-$i.png\" />\n";
-            }
 
+            echo "<span id=\"mapCanvasSpan\" ondragover=\"allowDrop(event)\" ondrop=\"drop(event)\"><canvas id=\"mapCanvas\"></canvas></span>\n";
 
-            echo "<div id=\"topBar\">\n";
-                echo "<a id=\"home\" href=\"../../index.php\"><i class=\"fas fa-home\"></i></a>\n";
-                echo "<p id=\"usernameTB\">".$_SESSION["topText"]."</p>\n";
-                echo "<abbr title=\"Save data\"><i id=\"savedata\" class=\"fas fa-save\" onclick=\"saveData()\"></i></abbr>\n";
-            echo END_DIV;
-    
-            echo "<div id=\"leftmenu\">\n";
-                echo "<div class=\"tabSelector\">\n";
-                    echo "<div id=\"contentListTab\" class=\"tabText selected\" onclick=\"tabsManager('contentListTab', 'imgPropertiesTab')\">Content List</div>\n";
-                    echo "<div id=\"imgPropertiesTab\" class=\"tabText\" onclick=\"tabsManager('imgPropertiesTab', 'contentListTab')\">Image properties</div>\n";
-                echo END_DIV;
-                echo "<div class=\"tabContent\">\n";
-                    echo "<div id=\"contentList\" readOnly>\n<dl></dl>\n</div>\n";
-                    echo "<div id=\"imgProperties\">\n";
-                        echo "<dl>\n";
-                            echo "<div id=\"imgPropertiesMsg\"></div>\n";
-                            echo "<dt>Size :</dt>\n";
-                                echo "<div class=\"modificators\"><i class=\"fas fa-compress-arrows-alt\" id=\"resize\" onclick=\"resize(-1)\"></i></div>\n";
-                                echo "<div class=\"modificators\"><i class=\"fas fa-expand-arrows-alt\" id=\"resize\" onclick=\"resize(1)\"></i></div>\n";
-                            echo "<dt>Rotation :</dt>\n";
-                                echo "<div class=\"modificators\"><i class=\"fas fa-undo\" id=\"rotate\" onclick=\"rotate(-1)\"></i></div>\n";
-                                echo "<div class=\"modificators\"><i class=\"fas fa-redo\" id=\"rotate\" onclick=\"rotate(1)\"></i></div>\n";
-                            echo "<dt>Floor</dt>\n";
+            echo "<div class=\"leftMenu\">\n";
+
+                echo "<span class=\"tabSelector\">\n";
+                    echo "<span id=\"contentListTab\" class=\"selected\" onclick=\"tabsManager('contentListTab', 'imgPropertiesTab')\"><span>Content List</span></span>\n";
+                    echo "<span id=\"imgPropertiesTab\" onclick=\"tabsManager('imgPropertiesTab', 'contentListTab')\"><span>Image properties</span></span>\n";
+                echo END_SPAN;
+                echo "<span class=\"tabContent\">\n";
+                    echo "<span id=\"contentList\" readOnly>\n<dl></dl>\n</span>\n";
+                    echo "<span id=\"imgProperties\">\n";
+                        echo "<span id=\"imgPropertiesMsg\"></span>\n";
+                        echo "<span class=\"imgPropSize\">\n";
+                            echo "<span class=\"imgPropTitle\">Size :</span>\n";
+                            echo "<span class=\"modificators\">\n";
+                                echo "<i class=\"fas fa-compress-arrows-alt\" id=\"resize\" onclick=\"resize(-1)\"></i>\n";
+                                echo "<i class=\"fas fa-expand-arrows-alt\" id=\"resize\" onclick=\"resize(1)\"></i>\n";
+                            echo END_SPAN;
+                        echo END_SPAN;
+                        echo "<span class=\"imgPropRotate\">\n";
+                            echo "<span class=\"imgPropTitle\">Rotation :</span>\n";
+                            echo "<span class=\"modificators\">\n";
+                                echo "<i class=\"fas fa-undo\" id=\"rotate\" onclick=\"rotate(-1)\"></i>\n";
+                                echo "<i class=\"fas fa-redo\" id=\"rotate\" onclick=\"rotate(1)\"></i>\n";
+                            echo END_SPAN;
+                        echo END_SPAN;
+                        echo "<span class=\"imgPropFloor\">\n";
+                            echo "<span class=\"imgPropTitle\">Floor</span>\n";
+                            echo "<span class=\"modificators\">\n";
                                 for($i = 0; $i <= $roofIndex; $i++)
                                 {
-                                    echo "<div class=\"modificators\"><input class=\"changeImgFloor\" id=\"$i\" type=\"button\" value=\"".($i + 1)."\" onclick=\"goToFloor($i)\" /></div>\n";
+                                    echo "<input class=\"changeImgFloor\" id=\"$i\" type=\"button\" value=\"".($i + 1)."\" onclick=\"goToFloor($i)\" />\n";
                                 }
-                                echo "<div class=\"modificators\"><i class=\"fas fa-trash-alt\" id=\"delete\" onclick=\"deleteImage()\"></i></div>\n";
-                            echo "</dl>\n";
-                    echo END_DIV;
-                echo END_DIV;
+                            echo END_SPAN;
+                        echo END_SPAN;
+                        echo "<span class=\"imgPropDel\">\n";
+                            echo "<span class=\"modificators\">\n";
+                                echo "<i class=\"fas fa-trash-alt\" id=\"delete\" onclick=\"deleteImage()\"></i>\n";
+                            echo END_SPAN;
+                        echo END_SPAN;
+                    echo END_SPAN;
+                echo END_SPAN;
             echo END_DIV;
-            echo "<div id=\"rightmenu\">\n";
 
-                echo "<div id=\"abilitieselector\">\n";
-                if($mod == "atk")
-                {
-                    for($i = 0; $i < sizeof($abilitienames2); $i++)
-                    {
-                        echo "<div><abbr title=\"$abilitienames2[$i]\"><img id=\"$abilitienames2[$i]-icon\" onclick=\"newImage('abilitie', '$abilitienames2[$i]')\" src=\"".IMG_PATH."abilitie/$abilitienames2[$i].png\" /></abbr></div>\n";
-                    }
-                }
-                else if($mod == "def")
-                {
-                    for($i = 0; $i < sizeof($abilitienames1); $i++)
-                    {
-                        echo "<div><abbr title=\"$abilitienames1[$i]\"><img id=\"$abilitienames1[$i]-icon\" onclick=\"newImage('abilitie', '$abilitienames1[$i]')\" src=\"".IMG_PATH."abilitie/$abilitienames1[$i].png\" /></abbr></div>\n";
-                    }
-                }
-            echo END_DIV;
-            echo "<div id=\"operatorsselector\">\n";
-                if($mod == "atk")
-                {
-                    $in = sizeof($opnames) / 2;
-                }
-                else if($mod == "def")
-                {
-                    $in = 0;
-                }
-                for($i = $in; $i < (sizeof($opnames) / 2 + $in); $i++)
-                {
-                    echo "<div><abbr title=\"$opnames[$i]\"><img id=\"$opnames[$i]-icon\" onclick=\"newImage('operator', '$opnames[$i]')\" src=\"".IMG_PATH."operator/$opnames[$i].jpg\" /></abbr></div>\n";
-                }
-            echo END_DIV;
-            echo "<div id=\"gadgetsselector\">\n";
-                if($mod == "atk")
-                {
-                    $in = 5;
-                }
-                else if($mod == "def")
-                {
-                    $in = 0;
-                }
-                for($i = $in; $i < (sizeof($gadgetsnames) - 5 + $in); $i++)
-                {
-                    echo "<div><abbr title=\"$gadgetsnames[$i]\"><img id=\"$gadgetsnames[$i]-icon\" onclick=\"newImage('gadget', '$gadgetsnames[$i]')\" src=\"".IMG_PATH."gadget/$gadgetsnames[$i].png\" /></abbr></div>\n";
-                }
+            echo "<div class=\"rightMenu\">\n";
 
-                if($mod == "def")
-                {
-                    echo "<abbr title=\"Reinforced wall\"><img id=\"addreinforcedwall\" src=\"".IMG_PATH."reinforcedwall/Reinforced wall.png\" onclick=\"newImage('reinforcedwall', 'Reinforced wall')\" /></abbr>\n";
-                    echo "<abbr title=\"Rotation\"><img id=\"addrotation\" src=\"".IMG_PATH."rotation/Rotation.png\" onclick=\"newImage('rotation', 'Rotation')\" /></abbr>\n";
-                }
-                else if($mod == "atk")
-                {
-                    echo "<abbr title=\"Drone\"><img id=\"adddrone\" src=\"".IMG_PATH."drone/drone.png\" onclick=\"newImage('drone', 'Drone')\" /></abbr>\n";
-                    echo "<abbr title=\"Defuser\"><img id=\"adddefuser\" src=\"".IMG_PATH."defuser/defuser.jpg\" onclick=\"newImage('defuser', 'Defuser')\" /></abbr>\n";
-                }
-            echo END_DIV;
+                echo "<span class=\"selectorsLists\">\n";
+                    echo "<span class=\"operatorsselector\">\n";
+                        if($mod == "atk")
+                        {
+                            $in = sizeof($opnames) / 2;
+                        }
+                        else if($mod == "def")
+                        {
+                            $in = 0;
+                        }
+                        for($i = $in; $i < (sizeof($opnames) / 2 + $in); $i++)
+                        {
+                            echo "<span><abbr title=\"$opnames[$i]\"><img id=\"$opnames[$i]-icon\" ondragstart=\"drag(event)\" draggable name=\"operator,$opnames[$i]\" src=\"".IMG_PATH."operator/$opnames[$i].jpg\" /></abbr></span>\n";
+                        }
+                    echo END_SPAN;
+                    echo "<span class=\"abilitieselector\">\n";
+                    if($mod == "atk")
+                    {
+                        for($i = 0; $i < sizeof($abilitienames2); $i++)
+                        {
+                            echo "<span><abbr title=\"$abilitienames2[$i]\"><img id=\"$abilitienames2[$i]-icon\" onclick=\"newImage('abilitie', '$abilitienames2[$i]')\" src=\"".IMG_PATH."abilitie/$abilitienames2[$i].png\" /></abbr></span>\n";
+                        }
+                    }
+                    else if($mod == "def")
+                    {
+                        for($i = 0; $i < sizeof($abilitienames1); $i++)
+                        {
+                            echo "<span><abbr title=\"$abilitienames1[$i]\"><img id=\"$abilitienames1[$i]-icon\" onclick=\"newImage('abilitie', '$abilitienames1[$i]')\" src=\"".IMG_PATH."abilitie/$abilitienames1[$i].png\" /></abbr></span>\n";
+                        }
+                    }
+                    echo END_SPAN;
+                    echo "<span class=\"gadgetsselector\">\n";
+                        if($mod == "atk")
+                        {
+                            $in = 5;
+                        }
+                        else if($mod == "def")
+                        {
+                            $in = 0;
+                        }
+                        for($i = $in; $i < (sizeof($gadgetsnames) - 5 + $in); $i++)
+                        {
+                            echo "<span><abbr title=\"$gadgetsnames[$i]\"><img id=\"$gadgetsnames[$i]-icon\" onclick=\"newImage('gadget', '$gadgetsnames[$i]')\" src=\"".IMG_PATH."gadget/$gadgetsnames[$i].png\" /></abbr></span>\n";
+                        }
+
+                        if($mod == "def")
+                        {
+                            echo "<span><abbr title=\"Reinforced wall\"><img id=\"addreinforcedwall\" src=\"".IMG_PATH."reinforcedwall/Reinforced wall.png\"/></abbr></span>\n";
+                            echo "<span><abbr title=\"Rotation\"><img id=\"addrotation\" src=\"".IMG_PATH."rotation/Rotation.png\" onclick=\"newImage('rotation', 'Rotation')\" /></abbr></span>\n";
+                        }
+                        else if($mod == "atk")
+                        {
+                            echo "<span><abbr title=\"Drone\"><img id=\"adddrone\" src=\"".IMG_PATH."drone/drone.png\" onclick=\"newImage('drone', 'Drone')\" /></abbr></span>\n";
+                            echo "<span><abbr title=\"Defuser\"><img id=\"adddefuser\" src=\"".IMG_PATH."defuser/defuser.jpg\" onclick=\"newImage('defuser', 'Defuser')\" /></abbr></span>\n";
+                        }
+                    echo END_SPAN;
+                echo END_SPAN;
 
             echo END_DIV;
             
